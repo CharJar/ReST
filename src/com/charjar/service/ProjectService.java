@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -73,6 +75,16 @@ public class ProjectService {
 		return response;
 	}
 	
-	
+	@PUT
+	@Path("/{userID}/{projectID}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String makeProjectViewed(
+			@PathParam("userID") String userID,
+			@PathParam("projectID") String projectID ) {
+		String response = null;
+		
+		
+		return response;
+	}
 	
 }
