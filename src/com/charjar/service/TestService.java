@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -31,7 +32,7 @@ import org.json.simple.parser.ParseException;
 import com.charjar.db.CPSFactory;
 import com.charjar.util.Constants;
 
-@Path("test")
+@Path("/test")
 public class TestService {
 
 	@GET
@@ -81,5 +82,11 @@ public class TestService {
 		}
 		
 		return response;
+	}
+	
+	@GET
+	@Path("/uuid")
+	public String getUUID() {
+		return UUID.randomUUID().toString();
 	}
 }

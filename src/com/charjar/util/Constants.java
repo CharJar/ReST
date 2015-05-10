@@ -7,7 +7,7 @@ public class Constants {
 	// Database Connection
 	public static final String DATABASE = "jdbc:sqlserver://jma-db.c5wfusvdk0sq.us-east-1.rds.amazonaws.com:1433;database=CharJar";
 	public static final String USERNAME = "CharJar";
-	public static final String PASSWORD = "@[L[~5u>WFRf/C<>C\39";
+	public static final String PASSWORD = "y3f2BWFw7hCySZzKQdaTCG3S";
 	
 	// ClusterPoint
 	public static final String CP_SERVER= "tcp://api-us.clusterpoint.com:443";
