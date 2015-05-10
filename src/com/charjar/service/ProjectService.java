@@ -75,13 +75,14 @@ public class ProjectService {
 					boolean hasDonated = rs.getBoolean("hasDonated");
 					
 					extras.put(projectUUID, "\"viewedTimes\":" + viewedTimes + ",\"hasDonated\":\"" + hasDonated + "\",");
+
+					if( !first ) {
+						ids +=",";
+					} 
 					
 					ids += "{\"id\":\"" + projectUUID + "\"}";
 					
-					if( !first ) {
-						ids +=",";
-						first = false;
-					}
+					first = false;
 				}
 				ids +="]";
 				
