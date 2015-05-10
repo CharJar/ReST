@@ -60,7 +60,7 @@ public class UserService {
 			JSONObject obj = (JSONObject) parser.parse(response);
 			JSONArray docs = (JSONArray) obj.get("documents");
 			JSONObject  doc = (JSONObject) docs.get(0);
-			String user_id = (String) doc.get("user_id");
+			String user_id = (String) doc.get("userID");
 			
 			if( !TextUtils.isEmpty(user_id) ) {
 				response = CPSFactory.getUser(user_id);
