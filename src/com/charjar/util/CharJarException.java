@@ -10,9 +10,9 @@ public class CharJarException extends Throwable {
 		this.message = getErrorMessage(errorID);
 	}
 	
-	public CharJarException(Throwable error) {
+	public CharJarException(Throwable e) {
 		this.errorID = 0;
-		this.message = error.getMessage();
+		this.message = e.getMessage();
 	}
 
 	public String getMessage() {

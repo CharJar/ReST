@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import com.charjar.db.CPSQueryFactory;
 import com.charjar.util.CharJarException;
 import com.charjar.util.DBConnection;
 import com.charjar.util.JsonTransformer;
@@ -18,7 +19,8 @@ import com.clusterpoint.api.CPSConnection;
 import com.clusterpoint.api.request.CPSRetrieveRequest;
 import com.clusterpoint.api.response.CPSListLastRetrieveFirstResponse;
 
-import static com.charjar.util.Constants.*;
+import static com.charjar.db.CPSQueryFactory.*;
+
 
 @Path("projects")
 public class ProjectService {
@@ -33,6 +35,7 @@ public class ProjectService {
 		String response = null;
 		Connection con = null;
 		CallableStatement cs = null;
+		CPSConnection cps = null;
 		
 		try {
 			con = DBConnection.getDBConnection();
@@ -53,13 +56,12 @@ public class ProjectService {
 				int viewedTimes = rs.getInt("ViewedTimes");
 				boolean hasDonated = rs.getBoolean("hasDonated");
 				
-				CPSConnection conn = new CPSConnection(CP_SERVER, "Projects", CP_USERNAME, CP_PASSWORD, 
-					        CP_ACCOUNT_ID, "document", "//document/id");
-				
+				cps = CPSQueryFactory.getConnection(DB_PROJECTS);				
 
 				CPSRetrieveRequest retr_req = new CPSRetrieveRequest(projectUUID);
-				CPSListLastRetrieveFirstResponse retr_resp = (CPSListLastRetrieveFirstResponse) conn.sendRequest(retr_req);
-				
+				CPSListLastRetrieveFirstResponse retr_resp = (CPSListLastRetrieveFirstResponse) cps.sendRequest(retr_req);
+
+				cps.close();
 			} else {
 				if( cs.getBoolean("Success") ) {
 					return "[]";
