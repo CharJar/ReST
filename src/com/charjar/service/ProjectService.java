@@ -29,8 +29,10 @@ public class ProjectService {
 	@Path("/")
 	public String getNextProject(
 			@QueryParam("userUUID") String userUUID,
-			@QueryParam("latitude") String latString,
-			@QueryParam("longitude") String longString) {
+			@QueryParam("quantity") String qty
+//			@QueryParam("latitude") String latString,
+//			@QueryParam("longitude") String longString
+			) {
 		String response = null;
 		Connection con = null;
 		CallableStatement cs = null;
@@ -38,11 +40,12 @@ public class ProjectService {
 		try {
 			con = DBConnection.getDBConnection();
 			
-			cs = con.prepareCall("{call sp_GetNextProject(?,?,?,?,?)}");
+			cs = con.prepareCall("{call sp_GetNextProject(?,?,?,?)}");
 			cs.setString("UserUUID", userUUID);
-			cs.setDouble("latitudeRad", Math.toRadians(Double.parseDouble(latString)));
-			cs.setDouble("longitudeRad", Math.toRadians(Double.parseDouble(longString)));
-			cs.setInt("Radius", 50); // default to 50 km
+			cs.setInt("Quantity", Integer.parseInt(qty));
+//			cs.setDouble("latitudeRad", Math.toRadians(Double.parseDouble(latString)));
+//			cs.setDouble("longitudeRad", Math.toRadians(Double.parseDouble(longString)));
+//			cs.setInt("Radius", 50); // default to 50 km
 			cs.registerOutParameter("Success", java.sql.Types.BIT);
 			cs.registerOutParameter("ErrorID", java.sql.Types.SMALLINT);
 			
