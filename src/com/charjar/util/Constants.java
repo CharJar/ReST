@@ -14,6 +14,7 @@ public class Constants {
 	public static final String CP_USERNAME = "aschulz@gatech.edu";
 	public static final String CP_PASSWORD = "charjar04!";
 	public static final String CP_ACCOUNT_ID = "100124";
+	public static final String CP_AUTORIZATION = "Basic YXNjaHVsekBnYXRlY2guZWR1OmNoYXJqYXIwNCE=";
 	
 	// Google
 	public static final String GOOGLE_PROJECT_ID = "625103153117";

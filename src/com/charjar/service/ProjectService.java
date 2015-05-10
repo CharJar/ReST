@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import com.charjar.db.CPSQueryFactory;
+import com.charjar.db.CPSFactory;
 import com.charjar.util.CharJarException;
 import com.charjar.util.DBConnection;
 import com.charjar.util.JsonTransformer;
@@ -19,7 +19,7 @@ import com.clusterpoint.api.CPSConnection;
 import com.clusterpoint.api.request.CPSRetrieveRequest;
 import com.clusterpoint.api.response.CPSListLastRetrieveFirstResponse;
 
-import static com.charjar.db.CPSQueryFactory.*;
+import static com.charjar.db.CPSFactory.*;
 
 
 @Path("projects")
@@ -56,7 +56,7 @@ public class ProjectService {
 				int viewedTimes = rs.getInt("ViewedTimes");
 				boolean hasDonated = rs.getBoolean("hasDonated");
 				
-				cps = CPSQueryFactory.getConnection(DB_PROJECTS);				
+				cps = CPSFactory.getConnection(DB_PROJECTS);				
 
 				CPSRetrieveRequest retr_req = new CPSRetrieveRequest(projectUUID);
 				CPSListLastRetrieveFirstResponse retr_resp = (CPSListLastRetrieveFirstResponse) cps.sendRequest(retr_req);
@@ -80,8 +80,9 @@ public class ProjectService {
 			DBConnection.closeConnection(con);
 		}
 		
-		
-		
 		return response;
 	}
+	
+	
+	
 }

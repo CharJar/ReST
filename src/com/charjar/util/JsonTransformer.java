@@ -9,12 +9,12 @@ public class JsonTransformer {
 		gson = new Gson();
 	}
 	
-	public static String toJson(Object o) {
-		if( o instanceof Exception )
-			return ((Exception) o).getMessage();
-		
+	public static String toJson(Object o) {		
 		if( o instanceof CharJarException )
 			return ((CharJarException) o).getMessage();
+		
+		if( o instanceof Exception )
+			return ((Exception) o).getMessage();
 		
 		return gson.toJson(o);
 	}

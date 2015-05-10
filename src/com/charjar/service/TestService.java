@@ -1,51 +1,43 @@
 package com.charjar.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.TextUtils;
 import org.json.JSONException;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.w3c.dom.Element;
 
 import com.charjar.db.CPSFactory;
-import com.charjar.util.CharJarException;
 import com.charjar.util.Constants;
-import com.charjar.util.JsonTransformer;
 
-import static com.charjar.db.CPSFactory.*;
-
-
-@Path("/users")
-public class UserService {
+@Path("test")
+public class TestService {
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	@Path("/")
-	public String login(
-			@QueryParam("email") String email,
-			@QueryParam("password") String password ) {
+	public String connect() throws ClientProtocolException, IOException {
 		String response = null;
 		
 		String url = "https://api-us.clusterpoint.com/100124/passwords/_search.json";
@@ -56,8 +48,8 @@ public class UserService {
 			
 			post.setHeader("Authorization", Constants.CP_AUTORIZATION);
 			
-			String query = CPSFactory.buildSearch("email", email)
-					+ CPSFactory.buildSearch("password", password);
+			String query = CPSFactory.buildSearch("email", "andrew")
+					+ CPSFactory.buildSearch("password", "test");
 			
 			query = "{\"query\":\"" + query + "\",\"docs\":\"1\",\"offset\":\"0\"}";
 			
@@ -80,33 +72,13 @@ public class UserService {
 			} else {
 				response = "[]";
 			}
-		} catch( Exception e) {
-			return e.getMessage();
-		} finally {
-			
-		}
-		
-		return response;
-	}
-	
-	@POST
-	@Produces(MediaType.TEXT_PLAIN)
-	@Path("/")
-	public String create(
-			@FormParam("user") String userObj,
-			@FormParam("password") String password) {
-		String response = null;
-		
-		try {
-			
-			
-			
-		} catch (Exception e) {
+		} catch( ParseException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
 			e.printStackTrace();
 		} finally {
 			
 		}
-		
 		
 		return response;
 	}
