@@ -22,7 +22,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.charjar.util.Constants;
-import com.clusterpoint.api.CPSConnection;
 
 public class CPSFactory {
 	
@@ -40,11 +39,6 @@ public class CPSFactory {
 	public static final String GT = "&gt;";
 	public static final String LT = "&lt;";
 	public static final String NOT = "~";
-	
-	public static CPSConnection getConnection(String project) throws Exception {
-		return new CPSConnection(CP_SERVER, project, CP_USERNAME, CP_PASSWORD, 
-		        CP_ACCOUNT_ID, "document", "//document/id");
-	}
 	
 	public static String buildSearch(String field, String value) {
 		return "<" + field + ">" + value + "</" + field + ">";
